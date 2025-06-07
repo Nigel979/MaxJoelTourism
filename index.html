@@ -32,7 +32,7 @@
 
   body.dark {
     filter: brightness(0.65);
-    color: #f0e68c;
+    color: #e0ffff;
     position: relative;
   }
   body.dark::after {
@@ -55,9 +55,9 @@
     animation-delay: 0.3s;
     text-align: center;
     padding: 1rem 2rem;
-    border: 4px solid #daa520;
+    border: 4px solid #00ced1;
     border-radius: 20px;
-    box-shadow: 0 0 15px #daa520;
+    box-shadow: 0 0 15px #00ced1;
     max-width: fit-content;
     margin: 0 auto 0.5rem auto;
     background: rgba(0,0,0,0.4);
@@ -68,107 +68,133 @@
     text-align: center;
     font-size: 1.3rem;
     font-weight: 500;
-    color: #ffd700cc;
-    margin-bottom: 3rem;
+    color: #00ffffcc;
+    margin-bottom: 1rem;
     text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
     opacity: 0;
     animation: fadeInDown 1s ease forwards;
     animation-delay: 0.8s;
   }
 
-  main {
+  .info {
     max-width: 600px;
-    margin: 0 auto;
-    background: rgba(0,0,0,0.5);
-    padding: 2.5rem 2rem 3rem 2rem;
+    text-align: center;
+    margin: 0 auto 2rem auto;
+    font-size: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  .contact-circle {
+    width: 60px;
+    height: 60px;
+    background: #00ced1;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 99;
+    box-shadow: 0 0 12px rgba(0,206,209,0.6);
+    transition: transform 0.3s ease;
+  }
+  .contact-circle:hover {
+    transform: scale(1.1);
+  }
+
+  .contact-modal {
+    position: fixed;
+    bottom: 80px;
+    right: 1rem;
+    width: 90%;
+    max-width: 400px;
+    background: rgba(0,0,0,0.9);
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(0,0,0,0.8);
-    z-index: 1;
-    opacity: 0;
-    animation: fadeInUp 1s ease forwards;
-    animation-delay: 1.2s;
-  }
-
-  main h2 {
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.7);
-    text-align: center;
-  }
-
-  form {
-    display: flex;
+    padding: 1.5rem;
+    display: none;
     flex-direction: column;
-    gap: 1.5rem;
+    z-index: 999;
+  }
+
+  .contact-modal.active {
+    display: flex;
+  }
+
+  .contact-modal h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #00ffff;
   }
 
   .input-group {
     position: relative;
+    margin-bottom: 1.2rem;
   }
+
   input, textarea {
     width: 100%;
-    padding: 1.1rem 1rem 0.4rem 1rem;
+    padding: 1rem 0.8rem;
+    background: rgba(255 255 255 / 0.1);
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
-    background: rgba(255 255 255 / 0.1);
     color: white;
-    resize: vertical;
-    transition: background 0.3s, box-shadow 0.3s;
+    font-size: 1rem;
   }
+
   input:focus, textarea:focus {
     outline: none;
-    background: rgba(255 255 255 / 0.3);
-    box-shadow: 0 0 10px #daa520;
+    background: rgba(255 255 255 / 0.2);
+    box-shadow: 0 0 10px #00ffff;
     color: #000;
-  }
-  textarea {
-    min-height: 100px;
   }
 
   label {
     position: absolute;
     top: 1rem;
-    left: 1rem;
+    left: 0.8rem;
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.7);
+    transition: 0.3s ease;
     pointer-events: none;
-    transition: all 0.3s ease;
   }
+
   input:focus + label,
   input:not(:placeholder-shown) + label,
   textarea:focus + label,
   textarea:not(:placeholder-shown) + label {
     top: 0.2rem;
     font-size: 0.75rem;
-    color: #daa520;
-    font-weight: 600;
+    color: #00ffff;
   }
 
   button {
-    background: #daa520;
+    background: #00ced1;
     border: none;
-    padding: 1.1rem;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 25px;
     color: #003366;
+    font-weight: bold;
     cursor: pointer;
-    user-select: none;
-    box-shadow: 0 6px 12px rgba(218, 165, 32, 0.6);
-    transition: background 0.3s, transform 0.2s;
+    transition: transform 0.2s;
   }
-  button:hover, button:focus {
-    background: #b8961e;
+  button:hover {
     transform: scale(1.05);
-    outline: none;
   }
 
   .dark-toggle {
     position: fixed;
     top: 1rem;
     right: 1rem;
-    background: #daa520;
+    background: #00ced1;
     color: #003366;
     border: none;
     padding: 0.6rem 1.3rem;
@@ -177,11 +203,12 @@
     cursor: pointer;
     z-index: 100;
     user-select: none;
-    box-shadow: 0 4px 8px rgba(218, 165, 32, 0.7);
+    box-shadow: 0 4px 8px rgba(0,206,209, 0.7);
     transition: background 0.3s ease, transform 0.2s ease;
   }
+
   .dark-toggle:hover {
-    background: #b8961e;
+    background: #00b3b3;
     transform: scale(1.1);
   }
 
@@ -189,54 +216,34 @@
     from {opacity: 0; transform: translateY(-20px);}
     to {opacity: 1; transform: translateY(0);}
   }
-  @keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
 
   @media (max-width: 600px) {
     body {
       padding: 1rem;
     }
-    header {
-      font-size: 2.2rem;
-      padding: 0.8rem 1.5rem;
-      border-width: 3px;
-      border-radius: 15px;
-      margin-bottom: 0.3rem;
-    }
-    .slogan {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-    }
-    main {
-      width: 100%;
-      padding: 2rem 1.5rem 2.5rem 1.5rem;
-    }
-    .dark-toggle {
-      top: 0.5rem;
-      right: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
   }
 </style>
 </head>
 <body>
-  <button class="dark-toggle" aria-label="Toggle dark mode">Dark Mode</button>
+  <button class="dark-toggle">Dark Mode</button>
 
   <header>MaxJoelTourism</header>
   <div class="slogan">Discover Dubai Like Never Before</div>
+  <div class="info">
+    Dubai, a glittering oasis in the desert, offers breathtaking skyscrapers, luxury shopping, cultural richness, thrilling desert safaris, and world-class entertainment. Whether you're riding through the golden dunes or dining atop the Burj Khalifa, MaxJoelTourism curates the best experiences for your Dubai adventure.
+  </div>
 
-  <main>
+  <div class="contact-circle" id="circle-btn">@</div>
+
+  <div class="contact-modal" id="contact-modal">
     <h2>Contact Us</h2>
-    <form id="contact-form" action="#" method="POST" novalidate>
+    <form id="contact-form" method="POST" action="sudhanadar53@gmail.com" enctype="text/plain">
       <div class="input-group">
-        <input type="text" id="name" name="name" placeholder=" " required autocomplete="off" />
+        <input type="text" id="name" name="name" placeholder=" " required />
         <label for="name">Your Name</label>
       </div>
       <div class="input-group">
-        <input type="email" id="email" name="email" placeholder=" " required autocomplete="off" />
+        <input type="email" id="email" name="email" placeholder=" " required />
         <label for="email">Your Email</label>
       </div>
       <div class="input-group">
@@ -245,24 +252,20 @@
       </div>
       <button type="submit">Send Message</button>
     </form>
-  </main>
+  </div>
 
   <script>
     const toggleBtn = document.querySelector('.dark-toggle');
+    const modal = document.getElementById('contact-modal');
+    const circleBtn = document.getElementById('circle-btn');
+
     toggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark');
       toggleBtn.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
     });
 
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        alert('Please fill out all fields correctly.');
-        return;
-      }
-      alert('Thank you for contacting MaxJoelTourism! We will get back to you soon.');
-      form.reset();
+    circleBtn.addEventListener('click', () => {
+      modal.classList.toggle('active');
     });
   </script>
 </body>
